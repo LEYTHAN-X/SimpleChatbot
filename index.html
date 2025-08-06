@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css');
 
         body {
             font-family: Arial, sans-serif;
@@ -16,11 +17,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 2vw;
             background: url('https://media.istockphoto.com/id/1030479060/photo/dark-green-blackboard.jpg?s=2048x2048&w=is&k=20&c=gnci1dB5x4JoBnUXCj7-Xn5nxeqeBAt9uJoyHBTjUEk=') no-repeat center center/cover;
             color: #075333;
-            padding: 20px;
-            font-size: 28px;
+            padding: 3vw;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: bold;
             font-family: 'Pacifico', cursive;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -28,16 +29,16 @@
         }
 
         .header img {
-            height: 50px;
-            width: 50px;
-            border-radius: 30px;
+            height: clamp(40px, 8vw, 50px);
+            width: clamp(40px, 8vw, 50px);
+            border-radius: 50%;
         }
 
         .toggle-dark {
-            margin: 10px auto;
+            margin: 2vw auto;
             display: block;
-            padding: 10px 20px;
-            font-size: 14px;
+            padding: 1.5vw 3vw;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
             border: none;
             border-radius: 8px;
             background-color: #343a40;
@@ -53,11 +54,11 @@
         .send-button {
             background-color: rgb(25, 135, 84);
             color: white;
-            padding: 12px 20px;
-            margin-left: 10px;
+            padding: 1.5vw 3vw;
+            margin-left: 1.5vw;
             border: none;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             cursor: pointer;
         }
 
@@ -66,22 +67,23 @@
         }
 
         .chat-input {
-            padding: 12px 15px;
+            padding: 1.5vw 2vw;
             border: 1px solid #ccc;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             flex-grow: 1;
         }
 
         .chat-input-container {
             display: flex;
-            margin-bottom: 60px;
+            margin-bottom: clamp(20px, 5vh, 40px);
+            padding: 0 2vw;
         }
 
         .app-container {
-            max-width: 600px;
+            max-width: 90vw;
             margin: 0 auto;
-            height: calc(100vh - 130px);
+            height: calc(100vh - clamp(100px, 15vh, 130px));
             display: flex;
             flex-direction: column;
         }
@@ -99,27 +101,36 @@
 
         .chat-message-text {
             background-color: #f1f1f1;
-            padding: 15px 20px;
+            padding: 2vw 3vw;
             border-radius: 10px;
-            margin-right: 10px;
-            margin-left: 10px;
-            margin-bottom: 20px;
-            max-width: 300px;
+            margin-right: 2vw;
+            margin-left: 2vw;
+            margin-bottom: 3vw;
+            max-width: 70%;
+            overflow-x: auto;
         }
 
         .chat-message-profile {
-            width: 50px;
+            width: clamp(40px, 8vw, 50px);
         }
 
         .chat-messages-container {
             flex-grow: 1;
-            margin-top: 20px;
+            margin-top: 3vw;
             overflow-y: scroll;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
 
-        /* Dark mode */
+        pre code {
+            display: block;
+            padding: 1.5vw;
+            border-radius: 5px;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
@@ -152,29 +163,78 @@
         body.dark-mode .toggle-dark:hover {
             background-color: #146c43;
         }
+
+        body.dark-mode pre code {
+            background-color: #2d2d2d;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 4vw;
+                font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+            }
+
+            .chat-message-text {
+                max-width: 80%;
+                padding: 3vw 4vw;
+            }
+
+            .chat-input-container {
+                padding: 0 3vw;
+            }
+
+            .app-container {
+                max-width: 95vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header img {
+                height: clamp(30px, 10vw, 40px);
+                width: clamp(30px, 10vw, 40px);
+            }
+
+            .toggle-dark {
+                padding: 2vw 4vw;
+                font-size: clamp(0.7rem, 3vw, 0.9rem);
+            }
+
+            .send-button {
+                padding: 2vw 4vw;
+                font-size: clamp(0.8rem, 3vw, 0.9rem);
+            }
+
+            .chat-input {
+                padding: 2vw 3vw;
+                font-size: clamp(0.8rem, 3vw, 0.9rem);
+            }
+
+            .chat-message-text {
+                max-width: 85%;
+                margin-bottom: 4vw;
+            }
+
+            .chat-message-profile {
+                width: clamp(30px, 10vw, 40px);
+            }
+        }
     </style>
 </head>
-
 <body>
-
-    <!-- Heading -->
     <div class="header">
         <img src="https://media.istockphoto.com/id/1430247885/photo/isolated-shot-of-jack-o-lantern-on-black-background.jpg?s=612x612&w=is&k=20&c=b-S5i_zPjlgKHsb1GvZQEddASmNrGNU2K9TIYSB4XPQ="
             alt="Logo">
         LEYTHAN-X's Nexus
     </div>
-
-    <!-- Dark mode toggle -->
     <button id="toggle-dark-mode" class="toggle-dark">🌙 Toggle Dark Mode</button>
-
     <div class="js-container"></div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/supersimpledev/react.js"></script>
-    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
-    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
-    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
-
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const toggleBtn = document.getElementById('toggle-dark-mode');
@@ -183,15 +243,17 @@
             });
         });
     </script>
-
-    <!-- React App -->
     <script type="text/babel">
         function ChatInput({ chatMessages, setChatMessages, setIsTyping }) {
             const [inputText, setInputText] = React.useState('');
+            const GEMINI_API_KEY = 'AIzaSyBqXQf6CrTErLEHKLgvzc8H1_RTCvh_FCY'; // Replace with your actual Gemini API key
+            const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+
             function saveInputText(event) {
                 setInputText(event.target.value);
             }
-            function sendMessage() {
+
+            async function sendMessage() {
                 if (inputText.trim() === '') return;
 
                 const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -207,28 +269,71 @@
                 setChatMessages(newChatMessages);
                 setIsTyping(true);
 
-                setTimeout(() => {
-                    const response = Chatbot.getResponse(inputText);
+                try {
+                    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: `If the response contains code, format it in a markdown code block with the appropriate language identifier (e.g., \`\`\`javascript or \`\`\`python). Ensure the code is well-structured and properly indented. For non-code responses, provide clear and concise text. Query: ${inputText}`
+                                }]
+                            }]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch response from Gemini API');
+                    }
+
+                    const data = await response.json();
+                    let botResponse = data.candidates[0].content.parts[0].text;
+
                     const time2 = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                     setChatMessages([
                         ...newChatMessages,
                         {
-                            message: response,
+                            message: botResponse,
                             sender: 'robot',
                             id: crypto.randomUUID(),
-                            timestamp: time2
+                            timestamp: time2,
+                            isCode: botResponse.includes('```')
                         }
                     ]);
+                } catch (error) {
+                    console.error('Error:', error);
+                    const time2 = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    setChatMessages([
+                        ...newChatMessages,
+                        {
+                            message: 'Sorry, something went wrong. Please try again.',
+                            sender: 'robot',
+                            id: crypto.randomUUID(),
+                            timestamp: time2,
+                            isCode: false
+                        }
+                    ]);
+                } finally {
                     setIsTyping(false);
-                }, 600);
+                }
 
                 setInputText('');
             }
+
+            function handleKeyPress(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            }
+
             return (
                 <div className="chat-input-container">
                     <input
                         placeholder="Send a message to Chatbot"
                         onChange={saveInputText}
+                        onKeyPress={handleKeyPress}
                         value={inputText}
                         className="chat-input"
                     />
@@ -237,20 +342,38 @@
             );
         }
 
-        function ChatMessage({ message, sender, timestamp }) {
+        function ChatMessage({ message, sender, timestamp, isCode }) {
+            const renderMessage = () => {
+                if (isCode) {
+                    const codeMatch = message.match(/```(\w+)?\n([\s\S]*?)\n```/);
+                    if (codeMatch) {
+                        const language = codeMatch[1] || 'text';
+                        const codeContent = codeMatch[2];
+                        return (
+                            <pre>
+                                <code className={`language-${language}`}>
+                                    {codeContent}
+                                </code>
+                            </pre>
+                        );
+                    }
+                }
+                return <div>{message}</div>;
+            };
+
             return (
                 <div className={sender === 'user' ? 'chat-message-user' : 'chat-message-robot'}>
                     {sender === 'robot' && (
-                        <img src="robot.png" className="chat-message-profile" />
+                        <img src="robot.png" className="chat-message-profile" alt="Robot" />
                     )}
                     <div className="chat-message-text">
-                        {message}
+                        {renderMessage()}
                         <div style={{ fontSize: '10px', marginTop: '5px', textAlign: 'right', opacity: 0.6 }}>
                             {timestamp}
                         </div>
                     </div>
                     {sender === 'user' && (
-                        <img src="user.png" className="chat-message-profile" />
+                        <img src="user.png" className="chat-message-profile" alt="User" />
                     )}
                 </div>
             );
@@ -263,6 +386,7 @@
                 if (containerElem) {
                     containerElem.scrollTop = containerElem.scrollHeight;
                 }
+                Prism.highlightAll();
             }, [chatMessages]);
 
             return (
@@ -272,6 +396,7 @@
                             message={chatMessage.message}
                             sender={chatMessage.sender}
                             timestamp={chatMessage.timestamp}
+                            isCode={chatMessage.isCode || false}
                             key={chatMessage.id}
                         />
                     ))}
@@ -285,13 +410,15 @@
                     message: "hello chatbot",
                     sender: "user",
                     id: 'id1',
-                    timestamp: "10:00"
+                    timestamp: "10:00",
+                    isCode: false
                 },
                 {
                     message: "Hello! How can I help you?",
                     sender: "robot",
                     id: 'id2',
-                    timestamp: "10:00"
+                    timestamp: "10:00",
+                    isCode: false
                 }
             ]);
             const [isTyping, setIsTyping] = React.useState(false);
@@ -317,5 +444,4 @@
         ReactDOM.createRoot(container).render(<App />);
     </script>
 </body>
-
 </html>
